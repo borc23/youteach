@@ -197,6 +197,7 @@ def updateUser(request):
     return render(request, 'base/update_user.html', context)
 
 def topicsPage(request):
-    topics = Topic.objects.filter()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    topics = Topic.objects.filter(name__icontains=q)
     context = {'topics': topics}
     return render(request, 'base/topics.html', context)
